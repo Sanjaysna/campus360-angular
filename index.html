@@ -15,7 +15,9 @@
     <input type="number" ng-model="totalfaculty" placeholder="Enter Total Faculty">
     <h1>{{collegename}}</h1>
 
-    <p>Total Students : {{totalstudents}}</p>
+    <p ng-class=" 
+{'green': totalstudents < 1000 }">
+        Total Students : {{totalstudents}}</p>
     <button ng-click="totalstudents=totalstudents+1">ADD STUDENT</button>
 
     <p>Total Faculty : {{totalfaculty}}</p>
@@ -24,16 +26,20 @@
     <h2>Student List</h2>
     <button ng-click="showAddStudentForm =!showAddStudentForm">Show/Hide Student</button>
 
-    <ul ng-show="showAddStudentForm">
+
+    <div ng-if="showdashboard = !showdashboard">
+
+        <ul ng-show="showAddStudentForm">
 
 
-        <li ng-repeat="student in students">
-            {{student.name}}
+            <li ng-repeat="student in students">
+                {{student.name}}
 
-        </li>
+            </li>
 
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
 
 </body>
 
