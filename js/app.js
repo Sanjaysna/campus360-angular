@@ -16,6 +16,8 @@ app.controller('dashboardcontroller', function ($scope) {
 
     $scope.addStudent = function () {
         $scope.totalstudents++;
+        $scope.showAddStudentForm = false;
+        $scope.showdashboard = true;
     }
 
 });

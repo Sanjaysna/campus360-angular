@@ -16,14 +16,25 @@
     <h1>{{collegename}}</h1>
 
     <p>Total Students : {{totalstudents}}</p>
-
-    <p>Total Faculty : {{totalfaculty}}</p>
     <button ng-click="totalstudents=totalstudents+1">ADD STUDENT</button>
 
+    <p>Total Faculty : {{totalfaculty}}</p>
+
+
     <h2>Student List</h2>
-    <ul>
-        <li ng-repeat="student in students">{{student.name}}</li>
-        
+    <button ng-click="showAddStudentForm =!showAddStudentForm">Show/Hide Student</button>
+
+    <ul ng-show="showAddStudentForm">
+
+
+        <li ng-repeat="student in students">
+            {{student.name}}
+
+        </li>
+
+        </li>
+    </ul>
+
 </body>
 
 </html>
