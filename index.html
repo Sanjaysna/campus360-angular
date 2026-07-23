@@ -235,6 +235,21 @@
                         <input type="text" ng-model="student.email" required>
                         <br><br>
 
+                        <label>Phone:</label>
+                        <br>
+                        <input type="text" ng-model="student.phone" required>
+                        <br><br>
+
+                        <label>Age:</label>
+                        <br>
+                        <input type="text" ng-model="student.age" required>
+                        <br><br>
+
+                        <label>Department:</label>
+                        <br>
+                        <input type="text" ng-model="student.department" required>
+                        <br><br>
+
 
 
 
@@ -262,6 +277,16 @@
                     <p>
                         dirty : {{ studentform.$dirty }}
                     </p>
+
+
+                    <p ng-show = "studentform.studentform.$touched && studentform.studentform.$invalid" style="color:red">
+                        Student Name is required.
+                    </p>
+                    <p ng-show = "studentform.studentform.$touched && studentform.studentform.$invalid" style="color:red">
+                        Email is required.
+                    </p>
+
+
 
 
 
