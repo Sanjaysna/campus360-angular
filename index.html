@@ -212,27 +212,60 @@
 
                     <br>
 
+
+
+<!--------------------------- Student Registration Form -------------------------------------------->
+
+
+
+
                     <h2>Student Registration Form</h2>
 
                     <form name="studentform">
+
+
                         <label>Student Name:</label>
                         <br>
-                        <input type="text" ng-model="student.name">
+                        <input type="text" ng-model="student.name" required>
                         <br><br>
+
 
                         <label>Email:</label>
                         <br>
-                        <input type="text" ng-model="student.email">
+                        <input type="text" ng-model="student.email" required>
                         <br><br>
+
+
+
 
                         <button>Register Student</button>
 
-                    
-
-
                     </form>
 
+                    <hr>
+                    <br><br>
 
+                    <h2>Form Status</h2>
+                    
+                    <p>
+                        valid : {{ studentform.$valid }}
+                    </p>
+
+                    <p>
+                        invalid : {{ studentform.$invalid }}
+                    </p>
+
+                    <p>
+                        pristine : {{ studentform.$pristine }}
+                    </p>
+
+                    <p>
+                        dirty : {{ studentform.$dirty }}
+                    </p>
+
+
+
+                </div>                                  
 
                 </div>
             </div>
