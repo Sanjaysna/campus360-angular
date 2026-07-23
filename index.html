@@ -1,45 +1,222 @@
 <!DOCTYPE html>
-<html ng-app="Campus360">
+<html lang="en" ng-app="Campus360">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>College Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
     <script src="node_modules/angular/angular.min.js"></script>
     <script src="js/app.js"></script>
-    <title>College Dashboard</title>
 </head>
 
 <body ng-controller="dashboardcontroller">
-    <input type="text" ng-model="collegename" placeholder="Enter College Name">
-    <input type="number" ng-model="totalstudents" placeholder="Enter Total Students">
-    <input type="number" ng-model="totalfaculty" placeholder="Enter Total Faculty">
-    <h1>{{collegename}}</h1>
 
-    <p ng-class=" 
-{'green': totalstudents < 1000 }">
-        Total Students : {{totalstudents}}</p>
-    <button ng-click="totalstudents=totalstudents+1">ADD STUDENT</button>
+    <div class="container">
 
-    <p>Total Faculty : {{totalfaculty}}</p>
+        <h1>{{collegename}}</h1>
+
+        <div class="input-section">
+
+            <label>College Name</label>
+            <input type="text" ng-model="collegename" placeholder="Enter College Name">
+
+            <label>Total Students</label>
+            <input type="number" ng-model="totalstudents" placeholder="Enter Total Students">
+
+            <label>Total Faculty</label>
+            <input type="number" ng-model="totalfaculty" placeholder="Enter Total Faculty">
+
+        </div>
+
+        <div class="card">
+
+            <p ng-class="{
+                'green': totalstudents > 1000,
+                'red': totalstudents <= 1000
+            }">
+                <strong>Total Students :</strong> {{totalstudents}}
+            </p>
+
+            <button ng-click="addStudent()">
+                ADD STUDENT
+            </button>
+
+            <p ng-class="{
+                'green': totalfaculty >= 100,
+                'red': totalfaculty < 100
+            }">
+                <strong>Total Faculty :</strong> {{totalfaculty}}
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Student List</h2>
+
+            <button ng-click="showAddStudentForm = !showAddStudentForm">
+                {{showAddStudentForm ? 'Hide Students' : 'Show Students'}}
+            </button>
+
+            <ul ng-show="showAddStudentForm">
+                <li ng-repeat="student in students">
+                    {{student.name}}
+                </li>
+            </ul>
+
+        </div>
+        <div class="card">
+        
+            <h2>Filter Demo</h2>
+        
+            <p>
+                <strong>Uppercase:</strong>
+                {{ collegename | uppercase }}
+            </p>
+        
+            <p>
+                <strong>Lowercase:</strong>
+                {{ collegename | lowercase }}
+            </p>
+        
+            <p>
+                <strong>Currency:</strong>
+                {{ fees | currency }}
+            </p>
+        
+            <p>
+                <strong>Indian Currency:</strong>
+                {{ fees | currency:'₹' }}
+            </p>
+        
+            <p>
+                <strong>Date:</strong>
+                {{ today | date:'dd/MM/yyyy' }}
+            </p>
+
+            <hr>
+            <br>
+            <br>
+
+            
+
+        
+                <hr>
+                <h2>Select departments</h2>
+                <label>Select Department</label>
+                <br>
+                <select ng-model="selectedDepartment" ng-options="department for department in departments">
+                </select>
+            
+                <p>Select Department:{{selectedDepartment}}</p>
 
 
-    <h2>Student List</h2>
-    <button ng-click="showAddStudentForm =!showAddStudentForm">Show/Hide Student</button>
+
+                <h2>Department Info</h2>
+                
+                <div ng-switch="selectedDepartment">
+                
+                    <div ng-switch-when="CSE">
+                        <h2>Computer Science and Engineering (CSE)</h2>
+                        <p>
+                            Computer Science and Engineering focuses on software development, programming,
+                            artificial intelligence, and computer systems. Students gain strong technical
+                            skills to build innovative software and technology solutions.
+                        </p>
+                    </div>
+                
+                    <div ng-switch-when="BCA">
+                        <h2>Bachelor of Computer Applications (BCA)</h2>
+                        <p>
+                            BCA provides a strong foundation in programming, databases, networking,
+                            and web technologies. It prepares students for careers in software development
+                            and the IT industry.
+                        </p>
+                    </div>
+                
+                    <div ng-switch-when="MCA">
+                        <h2>Master of Computer Applications (MCA)</h2>
+                        <p>
+                            MCA is a postgraduate program that enhances advanced programming,
+                            software engineering, and application development skills. It prepares
+                            graduates for leadership roles in the IT sector.
+                        </p>
+                    </div>
+                
+                    <div ng-switch-when="IMCA">
+                        <h2>Integrated Master of Computer Applications (IMCA)</h2>
+                        <p>
+                            IMCA is a five-year integrated program combining undergraduate and
+                            postgraduate computer application studies. It offers in-depth knowledge
+                            of modern computing technologies and software development.
+                        </p>
+                    </div>
+                
+                    <div ng-switch-when="EEE">
+                        <h2>Electrical and Electronics Engineering (EEE)</h2>
+                        <p>
+                            EEE focuses on electrical systems, power generation, electronics,
+                            and automation technologies. Students learn to design, develop, and
+                            maintain modern electrical and electronic systems.
+                        </p>
+                    </div>
+                
+                    <div ng-switch-when="MBA">
+                        <h2>Master of Business Administration (MBA)</h2>
+                        <p>
+                            MBA develops leadership, management, finance, marketing, and strategic
+                            decision-making skills. It prepares graduates for managerial and
+                            entrepreneurial careers across various industries.
+                        </p>
+                    </div>
+                
+                    <div ng-switch-default>
+                        <h3>Select a department to view its details.</h3>
+                    </div>
+
+                    <br><hr><br>
+
+                    <h2>ng-init demo</h2>
+                    <div ng-init="collegecode='FISAT12';location='Angamaly'">
+                        <p>College Code: {{collegecode}}</p>
+                        <p>Location: {{location}}</p>
 
 
-    <div ng-if="showdashboard = !showdashboard">
-
-        <ul ng-show="showAddStudentForm">
+                    </div>
 
 
-            <li ng-repeat="student in students">
-                {{student.name}}
+                    <h2>ng-disable demo</h2>
+                    <button ng-click="allowAdmission()">
+                        Enable Admission
+                    </button><br><br>
 
-            </li>
+                    <button ng-disabled="isDisabled">Take Admission</button>
 
-            </li>
-        </ul>
+                    <hr><br>
+
+                    <h2>ng-readonly demo</h2>
+                    <label >College ID</label>
+                    <br><br>
+
+                    <input type="text" ng-model="" ng-readonly="isReadOnly" >
+                    <br><br>
+
+                    <button ng-click="isReadOnly()">Toggle Read Only</button>
+
+
+
+                </div>
+            </div>
+        
+        </div>
+
     </div>
+    
+    
 
 </body>
 
